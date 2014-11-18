@@ -113,21 +113,19 @@ function buildCharacterSetHash() {
     for (var i = 0; i < charset.length; i++) {
         // add to hash table
         var c = charset.charAt(i);
-        var h = generateCharacterHash(c);
+        var h = generateCharacterHash(charset, c);
         alphanumericHash[h] = c;
     }
 }
 
 // generate "hash" for passed in character
-function generateCharacterHash(character) {
-    character = character.toUpperCase(); // ensure uppercase
-
+function generateCharacterHash(charset, character) {
     var strDots = '';
     var hashValue = '';
 
     // generate rows of dots
     for (var i = 0; i < dotStringWidth; i++) {
-        strDots = dots[ALPHANUMERIC.indexOf(character)][i];
+        strDots = dots[charset.indexOf(character)][i];
         hashValue += generateRowHash(i, strDots);
     }
 
